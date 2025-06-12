@@ -1,0 +1,178 @@
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+
+local Window = WindUI:CreateWindow({
+    Title = "Imperial Hatchers",
+    Icon = "cloud",
+    Author = "Script by @rainy.luvsyou",
+    Folder = "IMPH",
+    Size = UDim2.fromOffset(580, 460),
+    Transparent = true,
+    Theme = "Dark",
+    SideBarWidth = 200,
+    Background = "", -- rbxassetid only
+    BackgroundImageTransparency = 0.42,
+    HideSearchBar = true,
+    ScrollBarEnabled = false,
+    User = {
+        Enabled = true,
+        Anonymous = true,
+        Callback = function()
+            print("clicked")
+        end,
+    },
+})
+
+
+local eggList = {
+  ["100K Egg"] = "100K Egg"
+  ["Common Egg"] = "Common Egg"
+  ["Rare Egg"] = "Rare Egg"
+  ["Epic Egg"] = "Epic Egg"
+  ["Ice Egg"] = "Ice Egg"
+  ["Frozen Egg"] = "Frozen Egg"
+  ["Inferno Egg"] = "Inferno Egg"
+  ["Volcanic Egg"] = "Volcanic Egg"
+  ["Magical Egg"] = "Magical Egg"
+  ["Imagination Egg"] = "Imagination Egg"
+}
+
+
+local MainTab = Window:Tab({
+    Title = "Main",
+    Icon = "folder-closed",
+    Locked = false,
+})
+
+local Toggle = MainTab:Toggle({
+    Title = "Auto Click",
+    Desc = "Automatically Clicks",
+    Icon = "check",
+    Type = "Checkbox",
+    Default = false,
+    Callback = function(state)
+      getgenv().ClickEvent = state
+      if getgenv().ClickEvent then
+        task.spawn(function()
+          while getgenv().ClickEvent do
+            game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Events"):WaitForChild("ClickEvent"):FireServer(true)
+            task.wait()
+          end
+        end)
+      end
+    end
+})
+
+local MerchantTab = Window:Tab({
+    Title = "Merchant",
+    Icon = "store",
+    Locked = false,
+})
+
+local Toggle = MerchantTab:Toggle({
+    Title = "Auto Buy Lucky Potion",
+    Desc = "Automatically Purchases when Available",
+    Icon = "check",
+    Type = "Checkbox",
+    Default = false,
+    Callback = function(state)
+      getgenv().BuyLucky = state
+      if getgenv().BuyLucky then
+        task.spawn(function()
+          while getgenv().BuyLucky do
+            game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Events"):WaitForChild("MerchantEvents"):WaitForChild("BuyItem"):FireServer("LuckPotion")
+            task.wait(5)
+          end
+        end)
+      end
+    end
+})
+
+local Toggle = MerchantTab:Toggle({
+    Title = "Auto Buy Ultra Lucky Potion",
+    Desc = "Automatically Purchases when Available",
+    Icon = "check",
+    Type = "Checkbox",
+    Default = false,
+    Callback = function(state)
+      getgenv().BuyUltraLucky = state
+      if getgenv().BuyUltraLucky then
+        task.spawn(function()
+          while getgenv().BuyUltraLucky do
+            game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Events"):WaitForChild("MerchantEvents"):WaitForChild("BuyItem"):FireServer("UltraLuckPotion")
+            task.wait(5)
+          end
+        end)
+      end
+    end
+})
+
+local Toggle = MerchantTab:Toggle({
+    Title = "Auto Buy Rich Friend",
+    Desc = "Automatically Purchases when Available",
+    Icon = "check",
+    Type = "Checkbox",
+    Default = false,
+    Callback = function(state)
+      getgenv().BuyPet = state
+      if getgenv().BuyPet then
+        task.spawn(function()
+          while getgenv().BuyPet do
+            game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Events"):WaitForChild("MerchantEvents"):WaitForChild("BuyItem"):FireServer("HalloweenPet")
+            task.wait(10)
+          end
+        end)
+      end
+    end
+})
+
+local EggTab = Window:Tab({
+    Title = "Eggs",
+    Icon = "egg",
+    Locked = false,
+})
+
+local selectedEgg = nil
+
+local isHatchingEggs = false
+
+local Dropdown = EggTab:Dropdown({
+    Title = "Select Egg",
+    Values = {
+      "None"
+      "100K Egg",
+      "Common Egg",
+      "Rare Egg",
+      "Epic Egg",
+      "Ice Egg",
+      "Frozen Egg",
+      "Inferno Egg",
+      "Volcanic Egg",
+      "Magical Egg",
+    },
+    Value = "None",
+    Callback = function(option) 
+      selectedEgg = eggList[option]
+    end
+})
+
+local Toggle = EggTab:Toggle({
+    Title = "Enable Auto Hatch",
+    Desc = "Starts Auto Hatch",
+    Icon = "check",
+    Type = "Checkbox",
+    Default = false,
+    Callback = function(state)
+      isHatchingEggs = state
+      while isHatchingEggs do
+        if selectedEgg then
+          local args = {
+            selectedEgg
+            "Max"
+          }
+          game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Events"):WaitForChild("BuyEgg"):FireServer(unpack(args))
+          task.wait()
+        end
+      end
+    end
+})
+

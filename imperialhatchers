@@ -181,7 +181,7 @@ local Button = EggTab:Button({
     Desc = "Improves Performance",
     Locked = false,
     Callback = function()
-      local path = game:GetService("workspace"):WaitForChild("_")
+      local path = game:GetService("Workspace"):WaitForChild("_")
       local eggAnim = path:FindFirstChild("_EggAnim")
       if eggAnim then
         eggAnim:Destroy()

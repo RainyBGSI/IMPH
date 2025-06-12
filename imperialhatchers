@@ -24,16 +24,16 @@ local Window = WindUI:CreateWindow({
 
 
 local eggList = {
-  ["100K Egg"] = "100K Egg"
-  ["Common Egg"] = "Common Egg"
-  ["Rare Egg"] = "Rare Egg"
-  ["Epic Egg"] = "Epic Egg"
-  ["Ice Egg"] = "Ice Egg"
-  ["Frozen Egg"] = "Frozen Egg"
-  ["Inferno Egg"] = "Inferno Egg"
-  ["Volcanic Egg"] = "Volcanic Egg"
-  ["Magical Egg"] = "Magical Egg"
-  ["Imagination Egg"] = "Imagination Egg"
+  ["100K Egg"] = "100K Egg",
+  ["Common Egg"] = "Common Egg",
+  ["Rare Egg"] = "Rare Egg",
+  ["Epic Egg"] = "Epic Egg",
+  ["Ice Egg"] = "Ice Egg",
+  ["Frozen Egg"] = "Frozen Egg",
+  ["Inferno Egg"] = "Inferno Egg",
+  ["Volcanic Egg"] = "Volcanic Egg",
+  ["Magical Egg"] = "Magical Egg",
+  ["Imagination Egg"] = "Imagination Egg",
 }
 
 

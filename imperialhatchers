@@ -157,7 +157,7 @@ local Dropdown = EggTab:Dropdown({
 
 local Toggle = EggTab:Toggle({
     Title = "Enable Auto Hatch",
-    Desc = "Starts Auto Hatch",
+    Desc = "Enable if Removed Animation",
     Icon = "check",
     Type = "Checkbox",
     Default = false,

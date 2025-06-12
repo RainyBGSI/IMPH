@@ -166,7 +166,7 @@ local Toggle = EggTab:Toggle({
       while isHatchingEggs do
         if selectedEgg then
           local args = {
-            selectedEgg
+            selectedEgg,
             "Max"
           }
           game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Events"):WaitForChild("BuyEgg"):FireServer(unpack(args))

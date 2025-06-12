@@ -176,13 +176,14 @@ local Toggle = EggTab:Toggle({
     end
 })
 
+local workspace = game:GetService("workspace")
+
 local Button = EggTab:Button({
     Title = "Remove Egg Animation",
     Desc = "Improves Performance",
     Locked = false,
     Callback = function()
-      local path = game:GetService("Workspace"):WaitForChild("_")
-      local eggAnim = path:FindFirstChild("_EggAnim")
+      eggAnim = workspace:WaitForChild("_"):WaitForChild("_EggAnim")
       if eggAnim then
         eggAnim:Destroy()
       end

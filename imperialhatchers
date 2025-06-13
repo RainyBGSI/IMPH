@@ -3,7 +3,7 @@ local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/rel
 local Window = WindUI:CreateWindow({
     Title = "Imperial Hatchers",
     Icon = "cloud",
-    Author = "Script by ______",
+    Author = "Script by Rainy",
     Folder = "IMPH",
     Size = UDim2.fromOffset(460, 340),
     Transparent = true,
@@ -186,6 +186,8 @@ local Button = EggTab:Button({
         local eggAnim = folder:FindFirstChild("_EggAnim")
         if eggAnim then
           eggAnim:Destroy()
+        else
+          warn("_EggAnim Not Loaded Yet.")
         end
       end
     end

@@ -225,7 +225,7 @@ local Toggle = EventTab:Toggle({
 
             local candycornFolder = workspace:FindFirstChild("Collectables") and workspace.Collectables:FindFirstChild("Candycorn")
             if not candycornFolder then
-                warn("Candycorn folder not found")
+                warn("Coconut folder not found")
                 task.wait()
                 continue
             end

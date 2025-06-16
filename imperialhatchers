@@ -24,7 +24,9 @@ local Window = WindUI:CreateWindow({
 
 
 local eggList = {
-  [""] = "",
+  ["Ice Cream Egg"] = "Ice Cream Egg",
+  ["Water Egg"] = "Water Egg",
+  ["Tropical Egg"] = "Tropical Egg",
   ["Common Egg"] = "Common Egg",
   ["Rare Egg"] = "Rare Egg",
   ["Epic Egg"] = "Epic Egg",
@@ -139,7 +141,9 @@ local Dropdown = EggTab:Dropdown({
     Title = "Select Egg",
     Values = {
       "None",
-      "",
+      "Ice Cream Egg",
+      "Water Egg",
+      "Tropical Egg",
       "Common Egg",
       "Rare Egg",
       "Epic Egg",
@@ -201,7 +205,7 @@ local EventTab = Window:Tab({
 
 local Toggle = EventTab:Toggle({
     Title = "Auto Collect Coconuts",
-    Desc = "Auto Collects Coconuts",
+    Desc = "NW",
     Icon = "check",
     Type = "Checkbox",
     Default = false,
@@ -224,3 +228,55 @@ local Toggle = EventTab:Toggle({
         end)
     end
 })
+
+local Toggle = EventTab:Toggle({
+    Title = "Auto Collect Coconuts 2",
+    Desc = "TEST",
+    Icon = "check",
+    Type = "Checkbox",
+    Default = false,
+    Callback = function(state)
+        getgenv().AutoTP = state
+
+        while getgenv().AutoTP do
+            local player = game.Players.LocalPlayer
+            local character = player and player.Character
+            local hrp = character and character:FindFirstChild("HumanoidRootPart")
+
+            if not hrp then
+                warn("HumanoidRootPart not found")
+                task.wait(1)
+                continue
+            end
+
+            local candycornFolder = workspace:FindFirstChild("Collectables") and workspace.Collectables:FindFirstChild("Candycorn")
+            if not candycornFolder then
+                warn("Candycorn folder not found")
+                task.wait(1)
+                continue
+            end
+
+            for _, item in pairs(candycornFolder:GetChildren()) do
+                local function findTouchablePart(object)
+                    for _, descendant in ipairs(object:GetDescendants()) do
+                        if descendant:IsA("BasePart") and descendant:FindFirstChildOfClass("TouchInterest") then
+                            return descendant
+                        end
+                    end
+                    return nil
+                end
+
+                local targetPart = findTouchablePart(item)
+
+                if targetPart then
+                    print("Teleporting to:", item.Name)
+                    hrp.CFrame = targetPart.CFrame + Vector3.new(0, 2, 0) -- Slightly above to avoid getting stuck
+                    task.wait(0.15) -- Short delay so the touch registers
+                end
+            end
+
+            task.wait(0.2)
+        end
+    end
+})
+

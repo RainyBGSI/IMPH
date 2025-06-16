@@ -24,7 +24,7 @@ local Window = WindUI:CreateWindow({
 
 
 local eggList = {
-  ["100K Egg"] = "100K Egg",
+  [""] = "",
   ["Common Egg"] = "Common Egg",
   ["Rare Egg"] = "Rare Egg",
   ["Epic Egg"] = "Epic Egg",
@@ -139,7 +139,7 @@ local Dropdown = EggTab:Dropdown({
     Title = "Select Egg",
     Values = {
       "None",
-      "100K Egg",
+      "",
       "Common Egg",
       "Rare Egg",
       "Epic Egg",
@@ -193,3 +193,34 @@ local Button = EggTab:Button({
     end
 })
 
+local EggTab = Window:Tab({
+    Title = "Event",
+    Icon = "tree-palm",
+    Locked = false,
+})
+
+local Toggle = Tab:Toggle({
+    Title = "Auto Collect Coconuts",
+    Desc = "Auto Collects Coconuts",
+    Icon = "check",
+    Type = "Checkbox",
+    Default = false,
+    Callback = function(state)
+        getgenv().AutoCollectCandycorn = state
+        task.spawn(function()
+            while getgenv().AutoCollectCandycorn do
+                for i, v in pairs(game:GetService("Workspace").Collectables.Candycorn:GetChildren()) do
+                    local touchPart = v:FindFirstChild("Touch")
+                    if touchPart then
+                        local hrp = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+                        if hrp then
+                            firetouchinterest(hrp, touchPart, 0)
+                            firetouchinterest(hrp, touchPart, 1)
+                        end
+                    end
+                end
+                task.wait(0.2)
+            end
+        end)
+    end
+})

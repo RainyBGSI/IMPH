@@ -227,7 +227,7 @@ local Toggle = EventTab:Toggle({
                         continue
                     end
 
-                    humanoid.WalkSpeed = 70
+                    humanoid.WalkSpeed = 85
 
                     local candycornFolder = workspace:FindFirstChild("Collectables") and workspace.Collectables:FindFirstChild("Candycorn")
                     if not candycornFolder then

@@ -193,13 +193,13 @@ local Button = EggTab:Button({
     end
 })
 
-local EggTab = Window:Tab({
+local EventTab = Window:Tab({
     Title = "Event",
     Icon = "tree-palm",
     Locked = false,
 })
 
-local Toggle = Tab:Toggle({
+local Toggle = EventTab:Toggle({
     Title = "Auto Collect Coconuts",
     Desc = "Auto Collects Coconuts",
     Icon = "check",

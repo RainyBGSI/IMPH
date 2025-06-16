@@ -248,7 +248,7 @@ local Toggle = EventTab:Toggle({
                     if primary then
                         print("Teleporting to:", item.Name)
                         hrp.CFrame = primary.CFrame + Vector3.new(0, 2, 0) -- teleport slightly above
-                        task.wait(0.35)
+                        task.wait(0.17)
                     else
                         warn("No valid part found in model:", item.Name)
                     end

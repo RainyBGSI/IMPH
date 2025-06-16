@@ -219,14 +219,14 @@ local Toggle = EventTab:Toggle({
 
             if not hrp then
                 warn("HumanoidRootPart not found")
-                task.wait(1)
+                task.wait()
                 continue
             end
 
             local candycornFolder = workspace:FindFirstChild("Collectables") and workspace.Collectables:FindFirstChild("Candycorn")
             if not candycornFolder then
                 warn("Candycorn folder not found")
-                task.wait(1)
+                task.wait()
                 continue
             end
 
@@ -248,7 +248,7 @@ local Toggle = EventTab:Toggle({
                     if primary then
                         print("Teleporting to:", item.Name)
                         hrp.CFrame = primary.CFrame + Vector3.new(0, 2, 0) -- teleport slightly above
-                        task.wait(0.15)
+                        task.wait()
                     else
                         warn("No valid part found in model:", item.Name)
                     end

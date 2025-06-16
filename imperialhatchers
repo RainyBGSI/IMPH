@@ -205,89 +205,6 @@ local EventTab = Window:Tab({
 
 local Toggle = EventTab:Toggle({
     Title = "Auto Collect Coconuts",
-    Desc = "NW",
-    Icon = "check",
-    Type = "Checkbox",
-    Default = false,
-    Callback = function(state)
-        getgenv().AutoCollectCandycorn = state
-        task.spawn(function()
-            while getgenv().AutoCollectCandycorn do
-                for i, v in pairs(game:GetService("Workspace").Collectables.Candycorn:GetChildren()) do
-                    local touchPart = v:FindFirstChild("Touch")
-                    if touchPart then
-                        local hrp = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-                        if hrp then
-                            firetouchinterest(hrp, touchPart, 0)
-                            firetouchinterest(hrp, touchPart, 1)
-                        end
-                    end
-                end
-                task.wait(0.2)
-            end
-        end)
-    end
-})
-
-local Toggle = EventTab:Toggle({
-    Title = "Auto Collect Coconuts",
-    Desc = "Test",
-    Icon = "check",
-    Type = "Checkbox",
-    Default = false,
-    Callback = function(state)
-        getgenv().AutoTP = state
-
-        while getgenv().AutoTP do
-            local player = game.Players.LocalPlayer
-            local character = player and player.Character
-            local hrp = character and character:FindFirstChild("HumanoidRootPart")
-
-            if not hrp then
-                warn("HumanoidRootPart not found")
-                task.wait(1)
-                continue
-            end
-
-            local candycornFolder = workspace:FindFirstChild("Collectables") and workspace.Collectables:FindFirstChild("Candycorn")
-            if not candycornFolder then
-                warn("Candycorn folder not found")
-                task.wait(1)
-                continue
-            end
-
-            for _, item in pairs(candycornFolder:GetChildren()) do
-                if item:IsA("Model") then
-                    -- Get model's primary part or compute its center
-                    local primary = item.PrimaryPart
-                    if not primary then
-                        -- Try setting a PrimaryPart automatically if none is set
-                        for _, p in pairs(item:GetDescendants()) do
-                            if p:IsA("BasePart") then
-                                item.PrimaryPart = p
-                                primary = p
-                                break
-                            end
-                        end
-                    end
-
-                    if primary then
-                        print("Teleporting to:", item.Name)
-                        hrp.CFrame = primary.CFrame + Vector3.new(0, 2, 0) -- teleport slightly above
-                        task.wait(0.15)
-                    else
-                        warn("No valid part found in model:", item.Name)
-                    end
-                end
-            end
-
-            task.wait(0.2)
-        end
-    end
-})
-
-local Toggle = EventTab:Toggle({
-    Title = "Auto Collect Coconuts",
     Desc = "Auto Walks to Each Coconut",
     Icon = "check",
     Type = "Checkbox",
@@ -375,7 +292,7 @@ local Toggle = EventTab:Toggle({
             local character = game.Players.LocalPlayer.Character
             local humanoid = character and character:FindFirstChildOfClass("Humanoid")
             if humanoid then
-                humanoid.WalkSpeed = 16
+                humanoid.WalkSpeed = 20
             end
         end
     end

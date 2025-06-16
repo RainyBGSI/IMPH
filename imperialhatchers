@@ -205,33 +205,7 @@ local EventTab = Window:Tab({
 
 local Toggle = EventTab:Toggle({
     Title = "Auto Collect Coconuts",
-    Desc = "NW",
-    Icon = "check",
-    Type = "Checkbox",
-    Default = false,
-    Callback = function(state)
-        getgenv().AutoCollectCandycorn = state
-        task.spawn(function()
-            while getgenv().AutoCollectCandycorn do
-                for i, v in pairs(game:GetService("Workspace").Collectables.Candycorn:GetChildren()) do
-                    local touchPart = v:FindFirstChild("Touch")
-                    if touchPart then
-                        local hrp = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-                        if hrp then
-                            firetouchinterest(hrp, touchPart, 0)
-                            firetouchinterest(hrp, touchPart, 1)
-                        end
-                    end
-                end
-                task.wait(0.2)
-            end
-        end)
-    end
-})
-
-local Toggle = EventTab:Toggle({
-    Title = "Auto Collect Coconuts",
-    Desc = "Test",
+    Desc = "Teleports you to the closest coconuts",
     Icon = "check",
     Type = "Checkbox",
     Default = false,
@@ -281,7 +255,7 @@ local Toggle = EventTab:Toggle({
                 end
             end
 
-            task.wait(0.2)
+            task.wait()
         end
     end
 })
